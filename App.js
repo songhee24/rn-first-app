@@ -20,7 +20,7 @@ export default function App() {
   function addGoalHandler() {
     setCourseGoals((currentGoals) => [
       ...currentGoals,
-      { key: Math.random().toString(), value: enteredGoal },
+      { id: Math.random().toString(), value: enteredGoal },
     ]);
   }
 
@@ -37,6 +37,7 @@ export default function App() {
       </View>
       {/* that can get two props: vertical and horizontal - vertical by default*/}
       <FlatList
+          keyExtractor={item => item.id}
         data={courseGoals}
         renderItem={(itemData) => (
           <View style={styles.listItem}>
