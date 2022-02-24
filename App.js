@@ -1,13 +1,6 @@
-import {
-  Button,
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  ScrollView,
-  FlatList,
-} from "react-native";
+import { Button, StyleSheet, View, TextInput, FlatList } from "react-native";
 import { useState } from "react";
+import GoalItem from "./components/GoalItem";
 
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState("");
@@ -37,13 +30,9 @@ export default function App() {
       </View>
       {/* that can get two props: vertical and horizontal - vertical by default*/}
       <FlatList
-          keyExtractor={item => item.id}
+        keyExtractor={(item) => item.id}
         data={courseGoals}
-        renderItem={(itemData) => (
-          <View style={styles.listItem}>
-            <Text>{itemData.item.value}</Text>
-          </View>
-        )}
+        renderItem={(itemData) => <GoalItem title={itemData.item.value} />}
       />
     </View>
   );
@@ -65,12 +54,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     height: 50,
     paddingLeft: 6,
-  },
-  listItem: {
-    marginVertical: 10,
-    padding: 10,
-    backgroundColor: "#ccc",
-    borderColor: "black",
-    borderWidth: 1,
   },
 });
