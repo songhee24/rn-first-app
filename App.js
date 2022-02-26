@@ -8,6 +8,9 @@ export default function App() {
   const [isAddMode, setIsAddMode] = useState(false);
 
   const addGoalHandler = (goalTitle) => {
+    if (goalTitle.length === 0) {
+      return;
+    }
     setCourseGoals((currentGoals) => [
       ...currentGoals,
       { id: Math.random().toString(), value: goalTitle },
@@ -22,13 +25,17 @@ export default function App() {
   };
 
   const cancelGoalAdditionHandler = () => {
-    setIsAddMode(false)
-  }
+    setIsAddMode(false);
+  };
 
   return (
     <View style={styles.screen}>
       <Button title="Add new Goal" onPress={() => setIsAddMode(true)} />
-      <GoalInput visible={isAddMode} onAddGoal={addGoalHandler} onCancel={cancelGoalAdditionHandler} />
+      <GoalInput
+        visible={isAddMode}
+        onAddGoal={addGoalHandler}
+        onCancel={cancelGoalAdditionHandler}
+      />
       {/* that can get two props: vertical and horizontal - vertical by default*/}
       <FlatList
         keyExtractor={(item) => item.id}
