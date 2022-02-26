@@ -1,10 +1,11 @@
-import { Button, StyleSheet, View, TextInput, FlatList } from "react-native";
+import { Button, StyleSheet, View, FlatList } from "react-native";
 import { useState } from "react";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
 
 export default function App() {
   const [courseGoals, setCourseGoals] = useState([]);
+  const [isAddMode, setIsAddMode] = useState(false);
 
   const addGoalHandler = (goalTitle) => {
     setCourseGoals((currentGoals) => [
@@ -21,7 +22,8 @@ export default function App() {
 
   return (
     <View style={styles.screen}>
-      <GoalInput onAddGoal={addGoalHandler} />
+      <Button title="Add new Goal" onPress={() => setIsAddMode(true)} />
+      <GoalInput visible={isAddMode} onAddGoal={addGoalHandler} />
       {/* that can get two props: vertical and horizontal - vertical by default*/}
       <FlatList
         keyExtractor={(item) => item.id}
